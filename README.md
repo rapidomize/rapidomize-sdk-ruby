@@ -1,2 +1,5 @@
-# rapidomize-ruby-sdk
-Ruby SDK for Rapidomize
+# Rapidomize
+
+This is the Ruby version of Rapidomize SDK.
+
+## Under Development
