@@ -35,6 +35,28 @@ module Rapidomize
 
     public
 
+    # Factor method create payloads from
+    #
+    # * Hashes
+    # * JSON strings
+    #
+    # If a payload is given returns it back
+    # @param obj A hash, possible JSON string or a Payload object
+    # @return a Payload object
+    # @raise ArgumentError if obj is not a Hash, String or a Payload
+    def self.create(obj)
+      case obj
+      when Hash
+        Payload.new.from_hash(obj)
+      when String
+        Payload.new.from_json(obj)
+      when Payload
+        obj
+      else
+        raise ArgumentError, "Expected Hash, String or Payload; Given: #{obj.class}"
+      end
+    end
+
     # Get a value from the payload
     # @param key A key to search in the payload
     # @return the value associated with payload key, nil if key is not in payload

@@ -11,10 +11,11 @@ module Rapidomize
         data.to_json(*args)
       end
 
-      # Build a Payload object from a JSON string
+      # Add to Payload from a JSON string
       # @example From a json array, build an enum-like payload
       #   json_string = " '[{"data":1},{"data": 2}]'
       #   payload = Rapidomize::Payload.new.from_json(json_string)
+      # This can also be used to add data from JSON strings
       # @param str [String] A valid JSON string
       # @return [Payload] self
       def from_json(str)
@@ -24,7 +25,7 @@ module Rapidomize
             self << Rapidomize::Payload.new.from_hash(j)
           end
         else
-          from_hash(j)
+          from_hash(json)
         end
         self
       end
