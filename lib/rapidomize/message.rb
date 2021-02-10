@@ -4,24 +4,33 @@ module Rapidomize
   # Message objects are at the core of SDK.
   # Each message is an independent entity with following information
   #
-  # * uri, the destination of the message
-  # * app_id, ID of the rapidomize app to receive the message
-  # * token, For authorizations
-  # * payload, actual payload sent to the cloud.
+  # uri:: A message must have a URI, which is the destination of the message.
+  # payload:: A message may contain a Payload to transmit data
+  # token:: _(optional)_ token for authorization purposes
+  # app_id:: _(optional)_ app_id of the receiving ICAPP
   class Message
-
     TYPES = %i[session service event icapp ack nak ssm].freeze
 
+    attr_reader :uri, :payload, :app_id, :token
+
     # Initialize a message object
-    # @param payload [Payload] a Payload object
-    # @param uri [URI, String] optional URI for ICAPPs
-    def initialize(payload, uri = nil)
-      @payload = payload
-      @uri = get_uri(uri)
+    # @param uri [URI, String] Destination of the message.
+    # @param payload [Hash, String, Payload] Payload to transmit.
+    # @param token [String] Authorization token
+    # @param app_id [String] Receiving app id
+    def initialize(uri, payload = nil, token = nil, app_id = nil)
+      raise ArgumentError, 'uri is nil' if uri.nil?
+
+      @payload = Payload.create(payload) unless payload.nil?
+      @uri = sanitize_uri(uri)
+      @app_id = app_id
+      @token = token
       @type = guess_type
     end
 
-    # Message type is one of
+    # Type of the message.
+    # One of
+    #
     # * `:session`
     # * `:service`
     # * `:event`
@@ -29,11 +38,6 @@ module Rapidomize
     # * `:ack`
     # * `:nak`
     # * `:ssm`
-    # Some message types may have special requirements. For example:
-    # `:icapp` messages must have a URI corresponding to an ICAPP running
-    # on the cloud.
-    #
-    # @note Currently supports `:icapp` messages only
     attr_reader :type
 
     # Set message type
@@ -45,7 +49,9 @@ module Rapidomize
 
     private
 
-    def get_uri(uri)
+    # sanitize URIs.
+    # TODO: make sure the given URI is a valid rapidomize URL
+    def sanitize_uri(uri)
       if uri.is_a? String
         URI(uri)
       else
@@ -53,12 +59,10 @@ module Rapidomize
       end
     end
 
+    # Try to infer the type of the message.
+    # TODO: implement type inference
     def guess_type
-      if @uri.nil?
-        :event
-      else
-        :icapp
-      end
+      :icapp
     end
   end
 end
