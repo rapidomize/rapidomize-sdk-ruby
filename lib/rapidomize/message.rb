@@ -5,7 +5,7 @@ module Rapidomize
   # Each message is an independent entity with following information
   #
   # uri:: A message must have a URI, which is the destination of the message.
-  # payload:: A message may contain a Payload to transmit data
+  # payload:: _(optional)_ A message may contain a Payload to transmit data
   # token:: _(optional)_ token for authorization purposes
   # app_id:: _(optional)_ app_id of the receiving ICAPP
   class Message

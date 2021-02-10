@@ -130,4 +130,3 @@ module Rapidomize
     include Encoding::Json
   end
 end
-
