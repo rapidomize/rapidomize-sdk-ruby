@@ -20,18 +20,24 @@ jobs:
       matrix:
         ruby-version: ['2.6', '2.7', '3.0']
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Ruby
-    # uses: ruby/setup-ruby@473e4d8fe5dd94ee328fdfca9f8c9c7afc9dae5e
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: ${{ matrix.ruby-version }}
-        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-    - name: Run tests
-      run: bundle exec rake
+      - uses: actions/checkout@v2
+      - name: Set up Ruby
+      # uses: ruby/setup-ruby@473e4d8fe5dd94ee328fdfca9f8c9c7afc9dae5e
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+      - name: Run tests
+        run: bundle exec rake
+  rubocop:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Linting
+        run: bundle exec rake rubocop
   build-docs:
     needs: test
     runs-on: ubuntu-latest
     steps:
-    - name: Build docs
-      run: bundle exec rake yard
+      - name: Build docs
+        run: bundle exec rake yard

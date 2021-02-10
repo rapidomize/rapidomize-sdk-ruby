@@ -12,7 +12,7 @@ RuboCop::RakeTask.new
 require 'yard'
 
 YARD::Rake::YardocTask.new do |t|
-  t.options = %w[--markup markdown --no-private2]
+  t.options = %w[--markup asciidoc --no-private]
 end
 
-task default: %i[spec rubocop]
+task default: %i[spec]
