@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-require 'json' # for #to_json
+# Required for SDK
+require 'json'
+require 'net/http'
 require 'uri'
 
 # Errors
