@@ -132,22 +132,6 @@ Each message is an independent entity with following information</p>
   
 
 </div>
-  
-    <h2>
-      Constant Summary
-      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
-    </h2>
-
-    <dl class="constants">
-      
-        <dt id="TYPES-constant" class="">TYPES =
-          
-        </dt>
-        <dd><pre class="code"><span class='qsymbols_beg'>%i[</span><span class='tstring_content'>session</span><span class='words_sep'> </span><span class='tstring_content'>service</span><span class='words_sep'> </span><span class='tstring_content'>event</span><span class='words_sep'> </span><span class='tstring_content'>icapp</span><span class='words_sep'> </span><span class='tstring_content'>ack</span><span class='words_sep'> </span><span class='tstring_content'>nak</span><span class='words_sep'> </span><span class='tstring_content'>ssm</span><span class='tstring_end'>]</span></span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
-      
-    </dl>
-  
-
 
 
 
@@ -236,33 +220,6 @@ Each message is an independent entity with following information</p>
   
     <span class="summary_desc"><div class='inline'><div class="paragraph">
 <p>Returns the value of attribute token.</p>
-</div></div></span>
-  
-</li>
-
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#type-instance_method" title="#type (instance method)">#<strong>type</strong>  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><div class="paragraph">
-<p>Type of the message.</p>
 </div></div></span>
   
 </li>
@@ -384,7 +341,7 @@ Each message is an independent entity with following information</p>
         <span class='name'>payload</span>
       
       
-        <span class='type'>(<tt>Hash</tt>, <tt>String</tt>, <tt><span class='object_link'><a href="Payload.html" title="Rapidomize::Payload (class)">Payload</a></span></tt>)</span>
+        <span class='type'>(<tt>Hash</tt>, <tt>String</tt>, <tt><span class='object_link'><a href="Payload.html" title="Rapidomize::Payload (class)">Rapidomize::Payload</a></span></tt>)</span>
       
       
         <em class="default">(defaults to: <tt>nil</tt>)</em>
@@ -455,18 +412,17 @@ Each message is an independent entity with following information</p>
       <pre class="lines">
 
 
+19
+20
 21
 22
 23
 24
 25
-26
-27
-28
-29</pre>
+26</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapidomize/message.rb', line 21</span>
+      <pre class="code"><span class="info file"># File 'lib/rapidomize/message.rb', line 19</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_uri'>uri</span><span class='comma'>,</span> <span class='id identifier rubyid_payload'>payload</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_token'>token</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_app_id'>app_id</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>uri is nil</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_uri'>uri</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -475,7 +431,6 @@ Each message is an independent entity with following information</p>
   <span class='ivar'>@uri</span> <span class='op'>=</span> <span class='id identifier rubyid_sanitize_uri'>sanitize_uri</span><span class='lparen'>(</span><span class='id identifier rubyid_uri'>uri</span><span class='rparen'>)</span>
   <span class='ivar'>@app_id</span> <span class='op'>=</span> <span class='id identifier rubyid_app_id'>app_id</span>
   <span class='ivar'>@token</span> <span class='op'>=</span> <span class='id identifier rubyid_token'>token</span>
-  <span class='ivar'>@type</span> <span class='op'>=</span> <span class='id identifier rubyid_guess_type'>guess_type</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -515,12 +470,12 @@ Each message is an independent entity with following information</p>
       <pre class="lines">
 
 
-14
-15
-16</pre>
+12
+13
+14</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapidomize/message.rb', line 14</span>
+      <pre class="code"><span class="info file"># File 'lib/rapidomize/message.rb', line 12</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_app_id'>app_id</span>
   <span class='ivar'>@app_id</span>
@@ -558,12 +513,12 @@ Each message is an independent entity with following information</p>
       <pre class="lines">
 
 
-14
-15
-16</pre>
+12
+13
+14</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapidomize/message.rb', line 14</span>
+      <pre class="code"><span class="info file"># File 'lib/rapidomize/message.rb', line 12</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_payload'>payload</span>
   <span class='ivar'>@payload</span>
@@ -601,84 +556,15 @@ Each message is an independent entity with following information</p>
       <pre class="lines">
 
 
-14
-15
-16</pre>
+12
+13
+14</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapidomize/message.rb', line 14</span>
+      <pre class="code"><span class="info file"># File 'lib/rapidomize/message.rb', line 12</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_token'>token</span>
   <span class='ivar'>@token</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      
-      <span id="type=-instance_method"></span>
-      <div class="method_details ">
-  <h3 class="signature " id="type-instance_method">
-  
-    #<strong>type</strong>  &#x21d2; <tt>Object</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <div class="paragraph">
-<p>Type of the message.
-One of</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>:session</code></p>
-</li>
-<li>
-<p><code>:service</code></p>
-</li>
-<li>
-<p><code>:event</code></p>
-</li>
-<li>
-<p><code>:icapp</code></p>
-</li>
-<li>
-<p><code>:ack</code></p>
-</li>
-<li>
-<p><code>:nak</code></p>
-</li>
-<li>
-<p><code>:ssm</code></p>
-</li>
-</ul>
-</div>
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-41
-42
-43</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/rapidomize/message.rb', line 41</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_type'>type</span>
-  <span class='ivar'>@type</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -713,12 +599,12 @@ One of</p>
       <pre class="lines">
 
 
-14
-15
-16</pre>
+12
+13
+14</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapidomize/message.rb', line 14</span>
+      <pre class="code"><span class="info file"># File 'lib/rapidomize/message.rb', line 12</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_uri'>uri</span>
   <span class='ivar'>@uri</span>
@@ -734,7 +620,7 @@ One of</p>
 </div>
 
       <div id="footer">
-  Generated on Wed Feb 10 08:42:39 2021 by
+  Generated on Sun Feb 14 11:25:24 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.26 (ruby-3.0.0).
 </div>
