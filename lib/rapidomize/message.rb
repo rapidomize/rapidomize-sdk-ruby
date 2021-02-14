@@ -13,7 +13,7 @@ module Rapidomize
 
     # Initialize a message object
     # @param uri [URI, String] Destination of the message.
-    # @param payload [Hash, String, Payload] Payload to transmit.
+    # @param payload [Hash, String, Rapidomize::Payload] Payload to transmit.
     # @param token [String] Authorization token
     # @param app_id [String] Receiving app id
     def initialize(uri, payload = nil, token = nil, app_id = nil)
