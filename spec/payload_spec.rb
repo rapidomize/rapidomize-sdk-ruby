@@ -51,4 +51,18 @@ describe Rapidomize::Payload do
       payload << [Rapidomize::Payload.new, 1]
     end.to raise_error(Rapidomize::InvalidPayloadTypeError)
   end
+
+  it 'can generate JSON representation of itself' do
+    json_actual = Rapidomize::Payload.new.from_hash({ id: 1 }).to_json
+    json_expected = '{"id":1}'
+    expect(json_expected).to eq(json_actual)
+  end
+
+  it 'can build itself from a JSON representation' do
+    payload = Rapidomize::Payload.new.from_json('{"id":1}')
+    payload.from_json('{"from":"json"}') # add to the existing payload from json
+
+    expect(payload['id']).to eq(1)
+    expect(payload['from']).to eq('json')
+  end
 end
