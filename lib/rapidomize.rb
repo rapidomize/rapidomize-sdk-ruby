@@ -12,7 +12,11 @@ require 'rapidomize/error/invalid_message_type'
 
 # Utilities
 require 'rapidomize/encoding/json'
+require 'rapidomize/transport/base_transport'
+require 'rapidomize/transport/http_transport'
+require 'rapidomize/transport/retryable'
 
 # APIs
 require 'rapidomize/message'
 require 'rapidomize/payload'
+require 'rapidomize/client'

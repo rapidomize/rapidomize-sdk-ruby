@@ -19,7 +19,7 @@ module Rapidomize
     def initialize(uri, payload = nil, token = nil, app_id = nil)
       raise ArgumentError, 'uri is nil' if uri.nil?
 
-      @payload = Payload.create(payload) unless payload.nil?
+      @payload = Payload.create(payload)
       @uri = sanitize_uri(uri)
       @app_id = app_id
       @token = token

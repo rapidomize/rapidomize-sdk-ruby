@@ -17,7 +17,7 @@ module Rapidomize
       #   payload = Rapidomize::Payload.new.from_json(json_string)
       # This can also be used to add data from JSON strings
       # @param str [String] A valid JSON string
-      # @return [Payload] self
+      # @return self
       def from_json(str)
         json = JSON.parse(str)
         if json.is_a? Array

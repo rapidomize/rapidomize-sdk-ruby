@@ -35,23 +35,25 @@ module Rapidomize
 
     public
 
-    # Factor method create payloads from
-    #
-    # * Hashes
-    # * JSON strings
-    #
-    # If a payload is given returns it back
-    # @param obj A hash, possible JSON string or a Payload object
+    # Factory method create payloads from other data types. This method
+    # will return corresponding Payload objects for Hashes, JSON strings.
+    # If the given object is already a Payload, it will be copied.
+    # It returns an empty Payload when obj is nil
+    # @param [Hash, String, Payload, nil] obj A hash, possible JSON string or a Payload object
     # @return a Payload object
-    # @raise ArgumentError if obj is not a Hash, String or a Payload
+    # @raise ArgumentError if obj is not a Hash, String, Payload or nil
     def self.create(obj)
+      return Payload.new if obj.nil?
+
       case obj
       when Hash
+        # noinspection RubyYardParamTypeMatch
         Payload.new.from_hash(obj)
       when String
+        # noinspection RubyYardParamTypeMatch
         Payload.new.from_json(obj)
       when Payload
-        obj
+        obj.clone
       else
         raise ArgumentError, "Expected Hash, String or Payload; Given: #{obj.class}"
       end
