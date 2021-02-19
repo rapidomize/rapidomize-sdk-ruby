@@ -161,7 +161,7 @@ are immutable.</p>
 
   
     <span class="summary_desc"><div class='inline'><div class="paragraph">
-<p>Factor method create payloads from.</p>
+<p>Factory method create payloads from other data types.</p>
 </div></div></span>
   
 </li>
@@ -399,20 +399,10 @@ are immutable.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <div class="paragraph">
-<p>Factor method create payloads from</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Hashes</p>
-</li>
-<li>
-<p>JSON strings</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>If a payload is given returns it back</p>
+<p>Factory method create payloads from other data types. This method
+will return corresponding Payload objects for Hashes, JSON strings.
+If the given object is already a Payload, it will be copied.
+It returns an empty Payload when obj is nil</p>
 </div>
 
   </div>
@@ -426,7 +416,7 @@ are immutable.</p>
         <span class='name'>obj</span>
       
       
-        <span class='type'></span>
+        <span class='type'>(<tt>Hash</tt>, <tt>String</tt>, <tt><span class='object_link'><a href="" title="Rapidomize::Payload (class)">Payload</a></span></tt>, <tt>nil</tt>)</span>
       
       
       
@@ -469,7 +459,7 @@ are immutable.</p>
       
         
         <div class='inline'><div class="paragraph">
-<p>ArgumentError if obj is not a Hash, String or a Payload</p>
+<p>ArgumentError if obj is not a Hash, String, Payload or nil</p>
 </div></div>
       
     </li>
@@ -482,6 +472,8 @@ are immutable.</p>
       <pre class="lines">
 
 
+45
+46
 47
 48
 49
@@ -493,19 +485,25 @@ are immutable.</p>
 55
 56
 57
-58</pre>
+58
+59
+60</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapidomize/payload.rb', line 47</span>
+      <pre class="code"><span class="info file"># File 'lib/rapidomize/payload.rb', line 45</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_create'>create</span><span class='lparen'>(</span><span class='id identifier rubyid_obj'>obj</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='const'><span class='object_link'><a href="" title="Rapidomize::Payload (class)">Payload</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='kw'>if</span> <span class='id identifier rubyid_obj'>obj</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+
   <span class='kw'>case</span> <span class='id identifier rubyid_obj'>obj</span>
   <span class='kw'>when</span> <span class='const'>Hash</span>
-    <span class='const'><span class='object_link'><a href="" title="Rapidomize::Payload (class)">Payload</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_from_hash'><span class='object_link'><a href="#from_hash-instance_method" title="Rapidomize::Payload#from_hash (method)">from_hash</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_obj'>obj</span><span class='rparen'>)</span>
+    <span class='comment'># noinspection RubyYardParamTypeMatch
+</span>    <span class='const'><span class='object_link'><a href="" title="Rapidomize::Payload (class)">Payload</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_from_hash'><span class='object_link'><a href="#from_hash-instance_method" title="Rapidomize::Payload#from_hash (method)">from_hash</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_obj'>obj</span><span class='rparen'>)</span>
   <span class='kw'>when</span> <span class='const'>String</span>
-    <span class='const'><span class='object_link'><a href="" title="Rapidomize::Payload (class)">Payload</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_from_json'><span class='object_link'><a href="Encoding/Json.html#from_json-instance_method" title="Rapidomize::Encoding::Json#from_json (method)">from_json</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_obj'>obj</span><span class='rparen'>)</span>
+    <span class='comment'># noinspection RubyYardParamTypeMatch
+</span>    <span class='const'><span class='object_link'><a href="" title="Rapidomize::Payload (class)">Payload</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_from_json'><span class='object_link'><a href="Encoding/Json.html#from_json-instance_method" title="Rapidomize::Encoding::Json#from_json (method)">from_json</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_obj'>obj</span><span class='rparen'>)</span>
   <span class='kw'>when</span> <span class='const'><span class='object_link'><a href="" title="Rapidomize::Payload (class)">Payload</a></span></span>
-    <span class='id identifier rubyid_obj'>obj</span>
+    <span class='id identifier rubyid_obj'>obj</span><span class='period'>.</span><span class='id identifier rubyid_clone'>clone</span>
   <span class='kw'>else</span>
     <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Expected Hash, String or Payload; Given: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_obj'>obj</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
   <span class='kw'>end</span>
@@ -585,8 +583,6 @@ are immutable.</p>
       <pre class="lines">
 
 
-92
-93
 94
 95
 96
@@ -598,10 +594,12 @@ are immutable.</p>
 102
 103
 104
-105</pre>
+105
+106
+107</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapidomize/payload.rb', line 92</span>
+      <pre class="code"><span class="info file"># File 'lib/rapidomize/payload.rb', line 94</span>
 
 <span class='kw'>def</span> <span class='op'>&lt;&lt;</span><span class='lparen'>(</span><span class='id identifier rubyid_payload'>payload</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_payload'>payload</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'>Array</span>
@@ -686,12 +684,12 @@ are immutable.</p>
       <pre class="lines">
 
 
-63
-64
-65</pre>
+65
+66
+67</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapidomize/payload.rb', line 63</span>
+      <pre class="code"><span class="info file"># File 'lib/rapidomize/payload.rb', line 65</span>
 
 <span class='kw'>def</span> <span class='op'>[]</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_hashmap'>hashmap</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rbracket'>]</span>
@@ -781,12 +779,12 @@ are immutable.</p>
       <pre class="lines">
 
 
-71
-72
-73</pre>
+73
+74
+75</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapidomize/payload.rb', line 71</span>
+      <pre class="code"><span class="info file"># File 'lib/rapidomize/payload.rb', line 73</span>
 
 <span class='kw'>def</span> <span class='op'>[]=</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_hashmap'>hashmap</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_value'>value</span>
@@ -811,16 +809,16 @@ are immutable.</p>
       <pre class="lines">
 
 
-122
-123
 124
 125
 126
 127
-128</pre>
+128
+129
+130</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapidomize/payload.rb', line 122</span>
+      <pre class="code"><span class="info file"># File 'lib/rapidomize/payload.rb', line 124</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_data'>data</span>
   <span class='kw'>if</span> <span class='ivar'>@type</span> <span class='op'>==</span> <span class='symbol'>:enum</span>
@@ -860,16 +858,16 @@ are immutable.</p>
       <pre class="lines">
 
 
-114
-115
 116
 117
 118
 119
-120</pre>
+120
+121
+122</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapidomize/payload.rb', line 114</span>
+      <pre class="code"><span class="info file"># File 'lib/rapidomize/payload.rb', line 116</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='ivar'>@type</span> <span class='op'>==</span> <span class='symbol'>:enum</span>
@@ -929,13 +927,13 @@ are immutable.</p>
       <pre class="lines">
 
 
-84
-85
 86
-87</pre>
+87
+88
+89</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapidomize/payload.rb', line 84</span>
+      <pre class="code"><span class="info file"># File 'lib/rapidomize/payload.rb', line 86</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_from_hash'>from_hash</span><span class='lparen'>(</span><span class='id identifier rubyid_hash'>hash</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_hashmap'>hashmap</span><span class='period'>.</span><span class='id identifier rubyid_merge!'>merge!</span><span class='lparen'>(</span><span class='id identifier rubyid_hash'>hash</span><span class='period'>.</span><span class='id identifier rubyid_transform_keys'>transform_keys</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:to_s</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -1010,12 +1008,12 @@ are immutable.</p>
       <pre class="lines">
 
 
-78
-79
-80</pre>
+80
+81
+82</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapidomize/payload.rb', line 78</span>
+      <pre class="code"><span class="info file"># File 'lib/rapidomize/payload.rb', line 80</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_has?'>has?</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_hashmap'>hashmap</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span> <span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
@@ -1069,12 +1067,12 @@ are immutable.</p>
       <pre class="lines">
 
 
-109
-110
-111</pre>
+111
+112
+113</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapidomize/payload.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'lib/rapidomize/payload.rb', line 111</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_size'>size</span>
   <span class='id identifier rubyid_data'>data</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span>
@@ -1089,7 +1087,7 @@ are immutable.</p>
 </div>
 
       <div id="footer">
-  Generated on Sun Feb 14 11:25:24 2021 by
+  Generated on Fri Feb 19 16:24:30 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.26 (ruby-3.0.0).
 </div>

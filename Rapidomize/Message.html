@@ -427,7 +427,7 @@ Each message is an independent entity with following information</p>
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_uri'>uri</span><span class='comma'>,</span> <span class='id identifier rubyid_payload'>payload</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_token'>token</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_app_id'>app_id</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>uri is nil</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_uri'>uri</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
 
-  <span class='ivar'>@payload</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Payload.html" title="Rapidomize::Payload (class)">Payload</a></span></span><span class='period'>.</span><span class='id identifier rubyid_create'><span class='object_link'><a href="Payload.html#create-class_method" title="Rapidomize::Payload.create (method)">create</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_payload'>payload</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_payload'>payload</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='ivar'>@payload</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Payload.html" title="Rapidomize::Payload (class)">Payload</a></span></span><span class='period'>.</span><span class='id identifier rubyid_create'><span class='object_link'><a href="Payload.html#create-class_method" title="Rapidomize::Payload.create (method)">create</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_payload'>payload</span><span class='rparen'>)</span>
   <span class='ivar'>@uri</span> <span class='op'>=</span> <span class='id identifier rubyid_sanitize_uri'>sanitize_uri</span><span class='lparen'>(</span><span class='id identifier rubyid_uri'>uri</span><span class='rparen'>)</span>
   <span class='ivar'>@app_id</span> <span class='op'>=</span> <span class='id identifier rubyid_app_id'>app_id</span>
   <span class='ivar'>@token</span> <span class='op'>=</span> <span class='id identifier rubyid_token'>token</span>
@@ -620,7 +620,7 @@ Each message is an independent entity with following information</p>
 </div>
 
       <div id="footer">
-  Generated on Sun Feb 14 11:25:24 2021 by
+  Generated on Fri Feb 19 16:24:30 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.26 (ruby-3.0.0).
 </div>
