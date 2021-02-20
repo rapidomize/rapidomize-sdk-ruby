@@ -8,7 +8,6 @@ module Rapidomize
     # For CommonHTTP to send data, messages must provide a valid URI
     # of the HTTP endpoint.
     class CommonHTTP < BaseTransport
-
       # Deliver a message to the URI of the message
       # @param message [Message] a message object with a URI
       # @return [Net::HTTPResponse] Response object for the deliver
