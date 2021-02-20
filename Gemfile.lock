@@ -64,13 +64,13 @@ PLATFORMS
 
 DEPENDENCIES
   asciidoctor (~> 2.0)
-  rake
+  rake (~> 13.0)
   rapidomize!
   rspec (~> 3.10)
   rubocop (~> 1.9)
-  rubocop-rake
-  rubocop-rspec
-  webmock
+  rubocop-rake (~> 0.5)
+  rubocop-rspec (~> 2.2)
+  webmock (~> 3.11)
   yard (~> 0.9)
 
 BUNDLED WITH
