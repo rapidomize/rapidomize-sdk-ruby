@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
   spec.metadata['source_code_uri'] = 'https://github.com/rapidomize/rapidomize-ruby-sdk'
   spec.metadata['changelog_uri'] = 'https://github.com/rapidomize/rapidomize-ruby-sdk/blob/main/CHANGELOG.md'
 
-  spec.files = %w[lib/rapidomize.rb lib/rapidomize]
+  spec.files = %w[]
   spec.bindir        = 'exe'
   spec.executables   = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
